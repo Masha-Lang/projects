@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+#feld {
+    height: 300px;
+    width: 300px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: red;
+}

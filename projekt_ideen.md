@@ -1,0 +1,11 @@
+- [[firmware_hacks]]
+- [[hallo]]
+- trashmail generator
+- [[image_to_ascii]]
+- python_automatisation
+- send_emails
+- quadratische gleichungen lösen
+- chemie stöchiometrie lösen
+- übersetzer
+- encrypt/decrypt
+- 

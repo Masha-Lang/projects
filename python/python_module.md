@@ -1,0 +1,4 @@
+- change Text color in Terminal (https://pypi.org/project/termcolor/)
+- Pillow (Images, videos, etc.)
+- Twilio (send sms & Whatsapp messages)
+- 
