@@ -1,11 +1,11 @@
-- [[firmware_hacks]]
-- [[hallo]]
-- trashmail generator
-- [[image_to_ascii]]
+- [Firmware-Hacks](firmware_hacks.md)
+- [hallo](hallo)
+- Trashmail generator
+- [Image to ascii converter](image_to_ascii)
 - python_automatisation
 - send_emails
-- quadratische gleichungen lösen
-- chemie stöchiometrie lösen
+- quadratische Gleichungen lösen
+- Chemie Stöchiometrie lösen
 - übersetzer
 - encrypt/decrypt
 - 
