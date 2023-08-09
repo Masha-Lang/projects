@@ -1,49 +1,76 @@
 import random
 
-maze = [["0" for j in range(10)] for i in range(10)]
-possibilities = []
+############## FUNCTIONS #######
 
-
+def add_wall(c1, c2):
+    walls[0].append([c1, c2])
 
 def check(node_x, node_y):
     try:
         if node_x != -1 and node_y != -1:   
-            if maze[node_x][node_y] == "0" and maze[node_x][node_y] != "@": return True
+            if maze[node_x][node_y] == "0": return True
     except:
         pass
 
 def output():
-    for i in range(10):
+    for i in range(50):
         print(" ".join(maze[i]))
     print("\n")
 
-def function(node_x, node_y):
-    if maze[node_x][node_y+1] != "." and maze[node_x][node_y+1] != "@": maze[node_x][node_y+1] = "y"
-    if maze[node_x+1][node_y] != "." and maze[node_x+1][node_y] != "@": maze[node_x+1][node_y] = "y"
-    if maze[node_x][node_y-1] != "." and maze[node_x][node_y-1] != "@": maze[node_x][node_y-1] = "y"
-    if maze[node_x-1][node_y] != "." and maze[node_x-1][node_y] != "@": maze[node_x-1][node_y] = "y"
-    ### Get all possibilities
-    possibilities.clear()
-    if check(node_x, node_y+2) and maze[node_x][node_y+1] != "@": possibilities.append([node_x, node_y+1])
-    if check(node_x+2, node_y) and maze[node_x+1][node_y] != "@": possibilities.append([node_x+1, node_y])
-    if check(node_x, node_y-2) and maze[node_x][node_y-1] != "@": possibilities.append([node_x, node_y-1])
-    if check(node_x-2, node_y) and maze[node_x-1][node_y] != "@": possibilities.append([node_x-1, node_y])
-    ### Mark as visited and do walls arround
-    maze[node_x][node_y] = "."
-    if maze[node_x][node_y+1] == "y": maze[node_x][node_y+1] = "@"
-    if maze[node_x+1][node_y] == "y": maze[node_x+1][node_y] = "@"
-    if maze[node_x][node_y-1] == "y": maze[node_x][node_y-1] = "@"
-    if maze[node_x-1][node_y] == "y": maze[node_x-1][node_y] = "@"
+############## START ########
+
+possibilities = [[]]
+walls = [[]]
+a = []
+b = 50
+maze = [["0" for j in range(b)] for i in range(b)]
+for i in range(b): 
+    maze[i][0] = maze[i][-1] = maze[0][i] = maze[-1][i] = "@"
+    add_wall(0, i)
+    add_wall(b-1, i)
+
+for i in range(1, b-1):
+    add_wall(i, 0)
+    add_wall(i, b-1)
+
+############### MAIN-FUNCTION #######
+
+def function(node_x, node_y, r):
     while True:
+        possibilities.append([])
+        walls.append([])
+        for i in walls[r]:
+            a.clear()
+            for j in walls:
+                if i in j: a.append("0")
+            if len(a) == 1 and maze[i[0]][i[1]] != ".": maze[i[0]][i[1]] = "0"
+        #print(f"!!!! {walls[r]}")
+        ### Get all possibilities
+        if check(node_x, node_y+1): possibilities[r].append([node_x, node_y+1])
+        if check(node_x+1, node_y): possibilities[r].append([node_x+1, node_y])
+        if check(node_x, node_y-1): possibilities[r].append([node_x, node_y-1])
+        if check(node_x-1, node_y): possibilities[r].append([node_x-1, node_y])
+        #print(possibilities[r])
+        ### Mark as visited and do walls arround
+        maze[node_x][node_y] = "."
+        walls[r].clear()
+        if maze[node_x][node_y+1] != ".": walls[r].append([node_x, node_y+1])
+        if maze[node_x+1][node_y] != ".": walls[r].append([node_x+1, node_y])
+        if maze[node_x][node_y-1] != ".": walls[r].append([node_x, node_y-1])
+        if maze[node_x-1][node_y] != ".": walls[r].append([node_x-1, node_y])
+        for i in walls[r]:
+                if maze[i[0]][i[1]] != ".": maze[i[0]][i[1]] = "@"
         ### Get random node from possibilities
-        print(possibilities)
-        if len(possibilities) == 0:
+        if len(possibilities[r]) == 0:
+            for i in walls[r]: walls[0].append(i)
+            del walls[r]
+            del possibilities[r]
             return
         else:   
-            x = random.choice(possibilities)
-        output()
-        function(x[0], x[1])
+            x = random.choice(possibilities[r])
+        function(x[0], x[1], r+1)
+        possibilities[r] = []
 
-function(1, 1)
-
+function(1, 1, 1)
+output()
 
