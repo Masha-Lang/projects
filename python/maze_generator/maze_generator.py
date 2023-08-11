@@ -1,6 +1,8 @@
+############################ IMPORTS ###################################
+
 import random
 
-############## FUNCTIONS #######
+############################ FUNCTIONS #################################
 
 def add_wall(c1, c2):
     walls[0].append([c1, c2])
@@ -13,16 +15,16 @@ def check(node_x, node_y):
         pass
 
 def output():
-    for i in range(50):
+    for i in range(b):
         print(" ".join(maze[i]))
     print("\n")
 
-############## START ########
+############################ VARIABLES ################################
 
 possibilities = [[]]
 walls = [[]]
 a = []
-b = 50
+b = 7
 maze = [["0" for j in range(b)] for i in range(b)]
 for i in range(b): 
     maze[i][0] = maze[i][-1] = maze[0][i] = maze[-1][i] = "@"
@@ -33,9 +35,9 @@ for i in range(1, b-1):
     add_wall(i, 0)
     add_wall(i, b-1)
 
-############### MAIN-FUNCTION #######
+############################ MAIN-FUNCTION ############################
 
-def function(node_x, node_y, r):
+def get_maze(node_x, node_y, r):
     while True:
         possibilities.append([])
         walls.append([])
@@ -44,13 +46,11 @@ def function(node_x, node_y, r):
             for j in walls:
                 if i in j: a.append("0")
             if len(a) == 1 and maze[i[0]][i[1]] != ".": maze[i[0]][i[1]] = "0"
-        #print(f"!!!! {walls[r]}")
         ### Get all possibilities
         if check(node_x, node_y+1): possibilities[r].append([node_x, node_y+1])
         if check(node_x+1, node_y): possibilities[r].append([node_x+1, node_y])
         if check(node_x, node_y-1): possibilities[r].append([node_x, node_y-1])
         if check(node_x-1, node_y): possibilities[r].append([node_x-1, node_y])
-        #print(possibilities[r])
         ### Mark as visited and do walls arround
         maze[node_x][node_y] = "."
         walls[r].clear()
@@ -68,9 +68,12 @@ def function(node_x, node_y, r):
             return
         else:   
             x = random.choice(possibilities[r])
-        function(x[0], x[1], r+1)
+        get_maze(x[0], x[1], r+1)
         possibilities[r] = []
 
-function(1, 1, 1)
-output()
 
+############################ START #####################################
+
+# Get Maze
+get_maze(1, 1, 1)
+# To print out the output just call the function `output()`

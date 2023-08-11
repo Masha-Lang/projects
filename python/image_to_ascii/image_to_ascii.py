@@ -2,13 +2,11 @@ from PIL import Image
 
 print("\033[1;31;40m Red \033[0;0m")
 print("\033[1;31;40m Hallo \033[0;0m")
-# Open the Image and change the high and the width
-# Uncommit this line in the end
-#image = Image.open(input("Please input the location of the file to be converted: "))
 
+# Open the Image and change the high and the width
 while True:
     try:
-        image = Image.open("/Users/langma/Documents/test.png")
+        image = Image.open(input("Please input the location of the file to be converted: "))
         break
     except:
         print("Failed! Please enter a valid file-path!")
