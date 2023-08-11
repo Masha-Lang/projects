@@ -24,7 +24,7 @@ def output():
 possibilities = [[]]
 walls = [[]]
 a = []
-b = 7
+b = 50
 maze = [["0" for j in range(b)] for i in range(b)]
 for i in range(b): 
     maze[i][0] = maze[i][-1] = maze[0][i] = maze[-1][i] = "@"
@@ -76,4 +76,5 @@ def get_maze(node_x, node_y, r):
 
 # Get Maze
 get_maze(1, 1, 1)
+output()
 # To print out the output just call the function `output()`
