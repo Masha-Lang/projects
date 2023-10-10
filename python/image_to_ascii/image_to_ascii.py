@@ -1,8 +1,5 @@
 from PIL import Image
 
-print("\033[1;31;40m Red \033[0;0m")
-print("\033[1;31;40m Hallo \033[0;0m")
-
 # Open the Image and change the high and the width
 while True:
     try:
